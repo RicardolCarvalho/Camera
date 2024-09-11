@@ -5,11 +5,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="camera",  # Substitua pelo nome do seu pacote
+    name="camera",
     version="0.1.0",
     author="Ricardo Luz Carvalho",
     author_email="ricardolc2@al.insper.edu.br",
-    description="Um pacote que implementa a cifra camera",
+    description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/RicardolCarvalho/camera.git",
