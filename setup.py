@@ -7,8 +7,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="camera",
     version="0.1.0",
-    author="Ricardo Luz Carvalho",
-    author_email="ricardolc2@al.insper.edu.br",
+    author="Ricardo Luz Carvalho, Carlos Hernani Cardoso Dantes de Paiva Gadelha",
+    author_email="ricardolc2@al.insper.edu.br, carloshcdpg@al.insper.edu.br",
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
