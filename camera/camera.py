@@ -7,9 +7,9 @@ def rotacao_matriz(theta):
                      [0, 0, 1]])
     return roda
 
-def cisalhamento_matriz(cx, cy):
-    cisalha = np.array([[1, cx, 0],
-                        [cy, 1, 0],
+def cisalhamento_matriz(shx, shy):
+    cisalha = np.array([[1, shx, 0],
+                        [shy, 1, 0],
                         [0, 0, 1]])
     return cisalha
 
@@ -39,12 +39,12 @@ def aplicar_rotacao(image, angulo):
 
     return imagem_rotacionada
 
-def aplicar_cisalhamento(image, cx, cy):
+def aplicar_cisalhamento(image, shx, shy):
     altura, largura = image.shape[:2]
 
     cx, cy = largura // 2, altura // 2
 
-    cisalhamento = cisalhamento_matriz(cx, cy)
+    cisalhamento = cisalhamento_matriz(shx, shy)
 
     imagem_cisalhada = np.zeros_like(image)
 
@@ -81,6 +81,7 @@ def run():
 
     # Esse loop é igual a um loop de jogo: ele encerra quando apertamos 'q' no teclado.
     angulo = 0
+    velocidade = 1  # Variável para controlar a velocidade do giro
     cx, cy = 0.5, 0.5
     rodar = False
     cisalhamento = False
@@ -101,7 +102,7 @@ def run():
         if rodar and not cisalhamento:
             image = aplicar_rotacao(frame, angulo)
             # Incrementa o ângulo de rotação
-            angulo += 1
+            angulo += velocidade
             if angulo >= 360:
                 angulo = 0
 
@@ -111,30 +112,42 @@ def run():
         elif cisalhamento and rodar:
             image = aplicar_rotacao(frame, angulo)
             image = aplicar_cisalhamento(image, cx, cy)
-            angulo += 1
+            angulo += velocidade
             if angulo >= 360:
                 angulo = 0
-    
+
         else:
             # A variável image é um np.array com shape=(width, height, colors)
             image = np.array(frame).astype(float)/255
 
         # Agora, mostrar a imagem na tela!
         cv.imshow('Minha Imagem!', image)
-        
+
+        # Captura a tecla pressionada
+        key = cv.waitKey(1)
+
         # Se aperto 'q', encerro o loop
-        if cv.waitKey(1) == ord('q'):
+        if key == ord('q'):
             break
 
-        if cv.waitKey(1) == ord('c'):
+        if key == ord('c'):
             cisalhamento = not cisalhamento
-        
-        if cv.waitKey(1) == ord('r'):
+
+        if key == ord('r'):
             rodar = not rodar
 
-        if cv.waitKey(1) == 27:
+        # Encerra o loop se apertar 'Esc'
+        if key == 27:
             rodar = False
             cisalhamento = False
+
+        if key == ord('a'):
+            velocidade = max(1, velocidade - 1)
+
+        if key == ord('d'):
+            velocidade += 1
+
+        print(f"Velocidade: {velocidade}")
 
     cap.release()
     cv.destroyAllWindows()
