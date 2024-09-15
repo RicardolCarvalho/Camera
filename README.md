@@ -22,6 +22,10 @@ O programa deve abrir uma janela com a imagem da câmera.
 
 Pressionando a tecla `r` você faz a imagem começar a girar 360 graus.
 
+Pressionando a tecla `d` você faz a imagem começar a girar mais rápido.
+
+Pressionando a tecla `a` você faz a imagem começar a girar mais devagar.
+
 Pressionando a tecla `c` você transforma a imagem em um cisalhamento.
 
 Pressionando a tecla `esc` você faz a imagem parar de girar ou remover o cisalhamento.
